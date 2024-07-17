@@ -30,7 +30,8 @@ class _LoginPageState extends State<LoginPage> {
 
     var studentApi = StudentApi(
       username: _usernameController.text,
-        password: _passwordController.text);
+      password: _passwordController.text,
+    );
 
     _token = await studentApi.getToken();
     if (_token != 'Wrong email or password') {
@@ -107,40 +108,40 @@ class _LoginPageState extends State<LoginPage> {
               _isLoading
                   ? const CircularProgressIndicator()
                   : SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () async {
-                    await _login();
-                    //token is invalid
-                    if (_token == "Wrong email or password") {
-                      setState(() {
-                        textColor = Colors.red;
-                        textData = _token as String;
-                      });
-                    } else {
-                      //token is valid
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                            const MyHomePage(title: "SRM Student")),
-                      );
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          await _login();
+                          //token is invalid
+                          if (_token == "Wrong email or password") {
+                            setState(() {
+                              textColor = Colors.red;
+                              textData = _token as String;
+                            });
+                          } else {
+                            //token is valid
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const MyHomePage(title: "SRM Student")),
+                            );
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 15),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: const Text(
+                          'Login',
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                  child: const Text(
-                    'Login',
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-              ),
             ],
           ),
         ),
