@@ -41,30 +41,6 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.deepOrangeAccent,
         title: Text(widget.title),
         elevation: 20,
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.keyboard_arrow_left,
-              color: Colors.greenAccent,
-              size: 30,
-            ),
-            onPressed: () {
-              setState(() {
-                decreaseDayOrder();
-              });
-            },
-          ),
-          Text("$day", style: const TextStyle(color: Colors.white)),
-          IconButton(
-            icon: const Icon(Icons.keyboard_arrow_right,
-                color: Colors.greenAccent, size: 30),
-            onPressed: () {
-              setState(() {
-                increaseDayOrder();
-              });
-            },
-          ),
-        ],
       ),
       body: SafeArea(
         top: false,
@@ -152,19 +128,5 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
     );
-  }
-
-  void increaseDayOrder() {
-    setState(() {
-      day = (day == 5) ? 1 : day + 1;
-      dataObj.setDayOrder(day);
-    });
-  }
-
-  void decreaseDayOrder() {
-    setState(() {
-      day = (day == 1) ? 5 : day - 1;
-      dataObj.setDayOrder(day);
-    });
   }
 }
