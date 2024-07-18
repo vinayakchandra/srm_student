@@ -17,8 +17,7 @@ class MarksScreen extends StatelessWidget {
             color: (marksData[index]['category'] == ("Practical"))
                 ? Colors.lightGreenAccent
                 : Colors.yellow.shade300,
-            elevation: 3,
-            margin: const EdgeInsets.symmetric(vertical: 8.0),
+            // margin: const EdgeInsets.symmetric(vertical: 8.0),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
@@ -30,7 +29,7 @@ class MarksScreen extends StatelessWidget {
                   Text(
                     marksData[index]['subject_code'],
                     style: const TextStyle(
-                      fontSize: 18,
+                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -43,7 +42,7 @@ class MarksScreen extends StatelessWidget {
                         child: Text(
                           'Category: ${marksData[index]['category']}',
                           style: const TextStyle(
-                            fontSize: 16,
+                            // fontSize: 16,
                             color: Colors.black54,
                           ),
                         ),
@@ -53,13 +52,13 @@ class MarksScreen extends StatelessWidget {
                   const SizedBox(height: 4),
                   Row(
                     children: [
-                      const Icon(Icons.grade, color: Colors.black54),
+                      const Icon(Icons.numbers, color: Colors.black54),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
                           'Marks: ${marksData[index]['marks'].isEmpty ? '-' : marksData[index]['marks'][0]}',
                           style: const TextStyle(
-                            fontSize: 16,
+                            // fontSize: 16,
                             color: Colors.black54,
                           ),
                         ),
