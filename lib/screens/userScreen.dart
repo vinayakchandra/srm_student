@@ -21,6 +21,7 @@ class _UserScreenState extends State<UserScreen> {
           // crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Card(
+              color: Colors.teal.shade50,
               elevation: 4,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),

@@ -22,6 +22,7 @@ class AttendanceScreen extends StatelessWidget {
 
 class CourseCard extends StatelessWidget {
   final Map<String, dynamic> course;
+  Color textColor = Colors.black54;
 
   CourseCard({required this.course});
 
@@ -31,7 +32,6 @@ class CourseCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
-      elevation: 3,
       color: course['category'] == 'Practical'
           ? Colors.lightGreenAccent
           : Colors.yellow.shade300,
@@ -56,112 +56,125 @@ class CourseCard extends StatelessWidget {
             const SizedBox(height: 10),
             Row(
               children: [
-                const Icon(
+                Icon(
                   Icons.code,
-                  color: Colors.black54,
+                  color: textColor,
                 ),
                 const SizedBox(width: 10),
                 Text(
                   'Subject Code: ${course['subject_code']}',
-                  style: const TextStyle(fontSize: 16, color: Colors.black54),
+                  style: TextStyle(color: textColor),
                 ),
               ],
             ),
             const SizedBox(height: 5),
             Row(
               children: [
-                const Icon(
+                Icon(
                   Icons.person,
-                  color: Colors.black54,
+                  color: textColor,
                 ),
                 const SizedBox(width: 10),
                 Text(
                   'Faculty: ${course['subject_faculty']}',
-                  style: const TextStyle(fontSize: 16, color: Colors.black54),
+                  style: TextStyle(color: textColor),
                 ),
               ],
             ),
             const SizedBox(height: 5),
             Row(
               children: [
-                const Icon(
+                Icon(
                   Icons.category,
-                  color: Colors.black54,
+                  color: textColor,
                 ),
                 const SizedBox(width: 10),
                 Text(
                   'Category: ${course['category']}',
-                  style: const TextStyle(fontSize: 16, color: Colors.black54),
+                  style: TextStyle(color: textColor),
                 ),
               ],
             ),
             const SizedBox(height: 5),
             Row(
               children: [
-                const Icon(
+                Icon(
                   Icons.schedule,
-                  color: Colors.black54,
+                  color: textColor,
                 ),
                 const SizedBox(width: 10),
                 Text(
                   'Slot: ${course['slot']}',
-                  style: const TextStyle(fontSize: 16, color: Colors.black54),
+                  style: TextStyle(color: textColor),
                 ),
               ],
             ),
             const SizedBox(height: 5),
             Row(
               children: [
-                const Icon(
+                Icon(
                   Icons.timer,
-                  color: Colors.black54,
+                  color: textColor,
                 ),
                 const SizedBox(width: 10),
                 Text(
                   'Conducted Hours: ${course['conducted_hours']}',
-                  style: const TextStyle(fontSize: 16, color: Colors.black54),
+                  style: TextStyle(color: textColor),
                 ),
               ],
             ),
             const SizedBox(height: 5),
             Row(
               children: [
-                const Icon(
+                Icon(
                   Icons.hourglass_empty,
-                  color: Colors.black54,
+                  color: textColor,
                 ),
                 const SizedBox(width: 10),
                 Text(
                   'Absent Hours: ${course['absent_hours']}',
-                  style: const TextStyle(fontSize: 16, color: Colors.black54),
+                  style: TextStyle(color: textColor),
                 ),
               ],
             ),
             const SizedBox(height: 5),
             Row(
               children: [
-                const Icon(
+                Icon(
                   Icons.date_range,
-                  color: Colors.black54,
+                  color: textColor,
                 ),
                 const SizedBox(width: 10),
                 Text(
                   'Practical Date: ${course['practical_date']}',
-                  style: const TextStyle(fontSize: 16, color: Colors.black54),
+                  style: TextStyle(color: textColor),
                 ),
               ],
             ),
             const SizedBox(height: 5),
             Row(
               children: [
-                const Icon(
+                Icon(
                   Icons.access_time,
-                  color: Colors.black54,
+                  color: textColor,
                 ),
                 const SizedBox(width: 10),
                 Text(
                   'Practical Time: ${course['practical_time']}',
-                  style: const TextStyle(fontSize: 16, color: Colors.black54),
+                  style: TextStyle(color: textColor),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Icon(
+                  Icons.numbers,
+                  color: textColor,
+                ),
+                const SizedBox(width: 10),
+                Text(
+                  'Internal Marks: ${course['internal_marks']}',
+                  style: TextStyle(color: textColor),
                 ),
               ],
             ),

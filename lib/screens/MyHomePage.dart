@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:srm_student/details.dart';
@@ -56,17 +57,21 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Drawer buildDrawer() {
     return Drawer(
-      backgroundColor: const Color(0xffCBC3E3),
+      backgroundColor: Colors.orange.shade50,
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          const UserAccountsDrawerHeader(
+           const UserAccountsDrawerHeader(
+             // margin: EdgeInsets.zero,
+            decoration: BoxDecoration(
+              color: Colors.deepOrangeAccent,
+            ),
             accountName: Text("Made by Vinayak"),
             accountEmail: Text("vinayak.chandra.suryavanshi@gmail.com"),
           ),
           ListTile(
             tileColor: Colors.red,
-            leading: const Icon(Icons.arrow_back_rounded, color: Colors.white),
+            leading: const Icon(Icons.exit_to_app, color: Colors.white),
             title: const Text(
               "Logout",
               style: TextStyle(
@@ -79,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 print("LogOut");
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
                 );
               });
             },
@@ -96,10 +101,10 @@ class _MyHomePageState extends State<MyHomePage> {
       padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
       child: GNav(
         // backgroundColor: navColor,
-        activeColor: Colors.deepPurpleAccent,
+        activeColor: Colors.teal.shade800,
         // activeColor: Colors.deepOrange,
         color: Colors.white,
-        tabBackgroundColor: Colors.yellowAccent,
+        tabBackgroundColor: Colors.orangeAccent.shade100,
         padding: const EdgeInsets.all(15),
         gap: 10,
         selectedIndex: _selectedIndex,
