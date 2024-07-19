@@ -31,14 +31,10 @@ class _MyHomePageState extends State<MyHomePage> {
       AttendanceScreen(),
     ];
 
-    // print(dataObj.getDayOrder());
-
     return Scaffold(
-      // backgroundColor: Colors.blue.shade300,
       backgroundColor: Colors.teal.shade200,
       appBar: AppBar(
         centerTitle: true,
-        // backgroundColor: Colors.deepPurpleAccent,
         backgroundColor: Colors.deepOrangeAccent,
         title: Text(widget.title),
         elevation: 20,
@@ -61,8 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-           const UserAccountsDrawerHeader(
-             // margin: EdgeInsets.zero,
+          const UserAccountsDrawerHeader(
             decoration: BoxDecoration(
               color: Colors.deepOrangeAccent,
             ),
@@ -81,7 +76,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             onTap: () {
               setState(() {
-                print("LogOut");
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => const LoginPage()),
@@ -100,9 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
       color: navColor,
       padding: const EdgeInsets.fromLTRB(10, 5, 10, 25),
       child: GNav(
-        // backgroundColor: navColor,
         activeColor: Colors.teal.shade800,
-        // activeColor: Colors.deepOrange,
         color: Colors.white,
         tabBackgroundColor: Colors.orangeAccent.shade100,
         padding: const EdgeInsets.all(15),
@@ -113,21 +105,21 @@ class _MyHomePageState extends State<MyHomePage> {
             _selectedIndex = index;
           });
         },
-        tabs: const [
+        tabs: [
           GButton(
-            icon: Icons.person,
+            icon: _selectedIndex == 0 ? Icons.person : Icons.person_outline,
             text: "User",
           ),
           GButton(
-            icon: Icons.watch_later,
+            icon: _selectedIndex == 1 ? Icons.watch_later : Icons.watch_later_outlined,
             text: "Time Table",
           ),
           GButton(
-            icon: Icons.bar_chart,
+            icon: _selectedIndex == 2 ? Icons.assessment : Icons.assessment_outlined,
             text: "Marks",
           ),
           GButton(
-            icon: Icons.show_chart,
+            icon: _selectedIndex == 3 ? Icons.event_available: Icons.event_available_outlined,
             text: "Attendance",
           ),
         ],
