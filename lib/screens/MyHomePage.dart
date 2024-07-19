@@ -98,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Color navColor = Colors.black54;
     return Container(
       color: navColor,
-      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+      padding: const EdgeInsets.fromLTRB(10, 5, 10, 25),
       child: GNav(
         // backgroundColor: navColor,
         activeColor: Colors.teal.shade800,
