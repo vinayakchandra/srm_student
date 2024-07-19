@@ -28,6 +28,10 @@ class CourseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int conductedHours = int.tryParse(course['conducted_hours']) ?? 0;
+    int absentHours = int.tryParse(course['absent_hours']) ?? 0;
+    int present = conductedHours - absentHours;
+
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
@@ -35,151 +39,127 @@ class CourseCard extends StatelessWidget {
       color: course['category'] == 'Practical'
           ? Colors.lightGreenAccent
           : Colors.yellow.shade300,
-      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-      child: Padding(
-        padding: const EdgeInsets.all(15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      // margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+      child: ExpansionTile(
+        title: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Center(
+            Text(
+              course['subject_name'],
+              style: const TextStyle(
+                // fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
               child: Text(
-                course['subject_name'],
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+                course['subject_code'],
+                style: TextStyle(
+                  color: textColor,
                 ),
               ),
             ),
-            const SizedBox(height: 10),
-            const Divider(),
-            const SizedBox(height: 10),
             Row(
               children: [
-                Icon(
-                  Icons.code,
-                  color: textColor,
+                Column(
+                  children: [
+                    Text(
+                      "Total",
+                      style: TextStyle(
+                        color: Colors.teal.shade800,
+                      ),
+                    ),
+                    Text(
+                      course['conducted_hours'],
+                      style: TextStyle(
+                        color: Colors.teal.shade800,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 10),
-                Text(
-                  'Subject Code: ${course['subject_code']}',
-                  style: TextStyle(color: textColor),
+                const SizedBox(
+                  width: 10,
                 ),
-              ],
-            ),
-            const SizedBox(height: 5),
-            Row(
-              children: [
-                Icon(
-                  Icons.person,
-                  color: textColor,
+                Column(
+                  children: [
+                    Text(
+                      "Abs",
+                      style: TextStyle(
+                        color: Colors.red.shade900,
+                      ),
+                    ),
+                    Text(
+                      course['absent_hours'],
+                      style: TextStyle(
+                        color: Colors.red.shade900,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 10),
-                Text(
-                  'Faculty: ${course['subject_faculty']}',
-                  style: TextStyle(color: textColor),
+                const SizedBox(
+                  width: 10,
                 ),
-              ],
-            ),
-            const SizedBox(height: 5),
-            Row(
-              children: [
-                Icon(
-                  Icons.category,
-                  color: textColor,
-                ),
-                const SizedBox(width: 10),
-                Text(
-                  'Category: ${course['category']}',
-                  style: TextStyle(color: textColor),
-                ),
-              ],
-            ),
-            const SizedBox(height: 5),
-            Row(
-              children: [
-                Icon(
-                  Icons.schedule,
-                  color: textColor,
-                ),
-                const SizedBox(width: 10),
-                Text(
-                  'Slot: ${course['slot']}',
-                  style: TextStyle(color: textColor),
-                ),
-              ],
-            ),
-            const SizedBox(height: 5),
-            Row(
-              children: [
-                Icon(
-                  Icons.timer,
-                  color: textColor,
-                ),
-                const SizedBox(width: 10),
-                Text(
-                  'Conducted Hours: ${course['conducted_hours']}',
-                  style: TextStyle(color: textColor),
-                ),
-              ],
-            ),
-            const SizedBox(height: 5),
-            Row(
-              children: [
-                Icon(
-                  Icons.hourglass_empty,
-                  color: textColor,
-                ),
-                const SizedBox(width: 10),
-                Text(
-                  'Absent Hours: ${course['absent_hours']}',
-                  style: TextStyle(color: textColor),
-                ),
-              ],
-            ),
-            const SizedBox(height: 5),
-            Row(
-              children: [
-                Icon(
-                  Icons.date_range,
-                  color: textColor,
-                ),
-                const SizedBox(width: 10),
-                Text(
-                  'Practical Date: ${course['practical_date']}',
-                  style: TextStyle(color: textColor),
-                ),
-              ],
-            ),
-            const SizedBox(height: 5),
-            Row(
-              children: [
-                Icon(
-                  Icons.access_time,
-                  color: textColor,
-                ),
-                const SizedBox(width: 10),
-                Text(
-                  'Practical Time: ${course['practical_time']}',
-                  style: TextStyle(color: textColor),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.numbers,
-                  color: textColor,
-                ),
-                const SizedBox(width: 10),
-                Text(
-                  'Internal Marks: ${course['internal_marks']}',
-                  style: TextStyle(color: textColor),
+                Column(
+                  children: [
+                    Text(
+                      "Present",
+                      style: TextStyle(
+                        color: Colors.green.shade800,
+                      ),
+                    ),
+                    Text(
+                      "$present",
+                      style: TextStyle(
+                        color: Colors.green.shade800,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
           ],
         ),
+        children: <Widget>[
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: Divider(),
+          ),
+          _buildRow(Icons.code, 'Subject Code: ${course['subject_code']}'),
+          _buildRow(Icons.person, 'Faculty: ${course['subject_faculty']}'),
+          _buildRow(Icons.category, 'Category: ${course['category']}'),
+          _buildRow(Icons.schedule, 'Slot: ${course['slot']}'),
+          _buildRow(
+              Icons.timer, 'Conducted Hours: ${course['conducted_hours']}'),
+          _buildRow(
+              Icons.hourglass_empty, 'Absent Hours: ${course['absent_hours']}'),
+          _buildRow(
+              Icons.date_range, 'Practical Date: ${course['practical_date']}'),
+          _buildRow(
+              Icons.access_time, 'Practical Time: ${course['practical_time']}'),
+          _buildRow(
+              Icons.numbers, 'Internal Marks: ${course['internal_marks']}'),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRow(IconData icon, String text) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+      child: Row(
+        children: [
+          Icon(
+            icon,
+            color: textColor,
+          ),
+          const SizedBox(width: 10),
+          Text(
+            text,
+            style: TextStyle(color: textColor),
+          ),
+        ],
       ),
     );
   }
