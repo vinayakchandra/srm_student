@@ -31,6 +31,13 @@ class CourseCard extends StatelessWidget {
     int conductedHours = int.tryParse(course['conducted_hours']) ?? 0;
     int absentHours = int.tryParse(course['absent_hours']) ?? 0;
     int present = conductedHours - absentHours;
+    double presentPercentage =
+        conductedHours > 0 ? (present / conductedHours) * 100 : 0;
+
+    // Calculate threshold margin for 75% attendance
+    double threshold = conductedHours * 0.75;
+    int margin =
+        present - threshold.ceil() > 0 ? present - threshold.ceil() : 0;
 
     return Card(
       shape: RoundedRectangleBorder(
@@ -47,76 +54,58 @@ class CourseCard extends StatelessWidget {
             Text(
               course['subject_name'],
               style: const TextStyle(
-                // fontSize: 20,
                 fontWeight: FontWeight.bold,
+                fontSize: 18,
                 color: Colors.black87,
               ),
             ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                course['subject_code'],
-                style: TextStyle(
-                  color: textColor,
-                ),
-              ),
-            ),
+            const SizedBox(height: 5),
             Row(
               children: [
-                Column(
-                  children: [
-                    Text(
-                      "Total",
-                      style: TextStyle(
-                        color: Colors.teal.shade800,
-                      ),
-                    ),
-                    Text(
-                      course['conducted_hours'],
-                      style: TextStyle(
-                        color: Colors.teal.shade800,
-                      ),
-                    ),
-                  ],
+                Text(
+                  course['subject_code'],
+                  style: TextStyle(
+                    color: textColor,
+                  ),
                 ),
-                const SizedBox(
-                  width: 10,
+              ],
+            ),
+            const SizedBox(height: 5),
+            Row(
+              children: [
+                Text(
+                  "Margin: ",
+                  style: TextStyle(
+                      color: Colors.orange.shade800,
+                      fontWeight: FontWeight.bold),
                 ),
-                Column(
-                  children: [
-                    Text(
-                      "Abs",
-                      style: TextStyle(
-                        color: Colors.red.shade900,
-                      ),
-                    ),
-                    Text(
-                      course['absent_hours'],
-                      style: TextStyle(
-                        color: Colors.red.shade900,
-                      ),
-                    ),
-                  ],
+                Text(
+                  "$margin",
+                  style: TextStyle(
+                    color: Colors.orange.shade800,
+                  ),
                 ),
-                const SizedBox(
-                  width: 10,
+                const Spacer(),
+                Text(
+                  "${presentPercentage.toStringAsFixed(2)}%",
+                  style: TextStyle(
+                    color: Colors.blue.shade800,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                Column(
-                  children: [
-                    Text(
-                      "Present",
-                      style: TextStyle(
-                        color: Colors.green.shade800,
-                      ),
-                    ),
-                    Text(
-                      "$present",
-                      style: TextStyle(
-                        color: Colors.green.shade800,
-                      ),
-                    ),
-                  ],
-                ),
+              ],
+            ),
+            const SizedBox(height: 5),
+            Row(
+              children: [
+                _buildInfoColumn(
+                    "Total", course['conducted_hours'], Colors.teal.shade800),
+                const SizedBox(width: 10),
+                _buildInfoColumn(
+                    "Abs", course['absent_hours'], Colors.red.shade900),
+                const SizedBox(width: 10),
+                _buildInfoColumn("Present", "$present", Colors.green.shade800),
+                const SizedBox(width: 10),
               ],
             ),
           ],
@@ -161,6 +150,26 @@ class CourseCard extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildInfoColumn(String label, String value, Color color) {
+    return Column(
+      children: [
+        Text(
+          label,
+          style: TextStyle(
+            color: color,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          value,
+          style: TextStyle(
+            color: color,
+          ),
+        ),
+      ],
     );
   }
 }
