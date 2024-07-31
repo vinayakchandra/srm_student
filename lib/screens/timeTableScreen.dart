@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../details.dart';
 
 class TimeTableScreen extends StatefulWidget {
@@ -42,6 +43,7 @@ class _TimeTableScreenState extends State<TimeTableScreen> {
             setState(() {
               _currentSliderValue = value;
             });
+            HapticFeedback.selectionClick();
           },
         ),
         for (var entry in dayTimeTable.entries)
