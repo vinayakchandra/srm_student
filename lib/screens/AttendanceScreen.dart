@@ -37,7 +37,7 @@ class CourseCard extends StatelessWidget {
     // Calculate threshold margin for 75% attendance
     double threshold = conductedHours * 0.75;
     int margin =
-        present - threshold.ceil() > 0 ? present - threshold.ceil() : 0;
+        present - threshold.ceil();
 
     return Card(
       shape: RoundedRectangleBorder(
