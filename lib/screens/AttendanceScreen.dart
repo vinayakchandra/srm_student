@@ -144,9 +144,12 @@ class CourseCard extends StatelessWidget {
             color: textColor,
           ),
           const SizedBox(width: 10),
-          Text(
-            text,
-            style: TextStyle(color: textColor),
+          Expanded(
+            child: Text(
+              text,
+              style: TextStyle(color: textColor),
+              softWrap: true,
+            ),
           ),
         ],
       ),
