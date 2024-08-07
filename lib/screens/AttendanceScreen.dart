@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 import '../details.dart';
 
 class AttendanceScreen extends StatelessWidget {
@@ -36,8 +37,9 @@ class CourseCard extends StatelessWidget {
 
     // Calculate threshold margin for 75% attendance
     double threshold = conductedHours * 0.75;
-    int margin =
-        present - threshold.ceil();
+    int margin = present - threshold.ceil();
+    // presentPercentage = 50;
+    print("%=${presentPercentage / 100}");
 
     return Card(
       shape: RoundedRectangleBorder(
@@ -86,16 +88,25 @@ class CourseCard extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                Text(
-                  "${presentPercentage.toStringAsFixed(2)}%",
-                  style: TextStyle(
-                    color: Colors.blue.shade800,
-                    fontWeight: FontWeight.bold,
+                CircularPercentIndicator(
+                  radius: 40,
+                  lineWidth: 5,
+                  circularStrokeCap: CircularStrokeCap.round,
+                  backgroundColor: Colors.black12,
+                  center: Text(
+                    "${presentPercentage.toStringAsFixed(2)}%",
+                    style: TextStyle(
+                      color: Colors.blue.shade800,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
+                  progressColor:
+                      presentPercentage < 75 ? Colors.red : Colors.blue,
+                  percent: presentPercentage / 100,
                 ),
               ],
             ),
-            const SizedBox(height: 5),
+            // const SizedBox(height: 5),
             Row(
               children: [
                 _buildInfoColumn(
