@@ -1,4 +1,8 @@
+import 'dart:convert';
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:srm_student/api.dart';
 import 'package:srm_student/details.dart';
 import 'package:srm_student/screens/MyHomePage.dart';
@@ -23,6 +27,33 @@ class _LoginPageState extends State<LoginPage> {
   String textData = "Welcome Back!";
   Color textColor = Colors.blue;
 
+  @override
+  void initState() {
+    super.initState();
+    print("os = ${Platform.operatingSystem}");
+    checkOS();
+  }
+
+  Future<void> checkOS() async {
+    if (kIsWeb || Platform.isAndroid) {
+      final prefs = await SharedPreferences.getInstance();
+      print("ITS IN WEB🕸️");
+
+      if (prefs.getString("details") != null) {
+        print("✅Details found in cache");
+        dataObj.setData(jsonDecode(prefs.getString("details")!));
+        navigateToHomePage();
+      }
+    } else {
+      // Implement similar logic for non-web platforms if needed
+      final prefs = await SharedPreferences.getInstance();
+      if (prefs.getString("details") != null) {
+        dataObj.setData(jsonDecode(prefs.getString("details")!));
+        navigateToHomePage();
+      }
+    }
+  }
+
   Future<void> _login() async {
     setState(() {
       _isLoading = true;
@@ -37,6 +68,8 @@ class _LoginPageState extends State<LoginPage> {
     if (_token != 'Wrong email or password') {
       details = await studentApi.getDetails();
 
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setString("details", jsonEncode(details));
       dataObj.setData(details!);
 
       user = await details!["user"];
@@ -47,6 +80,24 @@ class _LoginPageState extends State<LoginPage> {
     setState(() {
       _isLoading = false;
     });
+
+    if (_token != 'Wrong email or password') {
+      navigateToHomePage();
+    } else {
+      setState(() {
+        textColor = Colors.red;
+        textData = _token as String;
+      });
+    }
+  }
+
+  void navigateToHomePage() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const MyHomePage(title: "SRM Student"),
+      ),
+    );
   }
 
   void _togglePasswordVisibility() {
@@ -110,24 +161,7 @@ class _LoginPageState extends State<LoginPage> {
                   : SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () async {
-                          await _login();
-                          //token is invalid
-                          if (_token == "Wrong email or password") {
-                            setState(() {
-                              textColor = Colors.red;
-                              textData = _token as String;
-                            });
-                          } else {
-                            //token is valid
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const MyHomePage(title: "SRM Student")),
-                            );
-                          }
-                        },
+                        onPressed: _login,
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 15),
                           shape: RoundedRectangleBorder(
