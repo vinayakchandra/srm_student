@@ -75,16 +75,26 @@ class CourseCard extends StatelessWidget {
             const SizedBox(height: 5),
             Row(
               children: [
+                (margin > 0)
+                    ? Text(
+                        "Margin: ",
+                        style: TextStyle(
+                            color: Colors.orange.shade800,
+                            fontWeight: FontWeight.bold),
+                      )
+                    : Text(
+                        "Required: ",
+                        style: TextStyle(
+                            color: Colors.red.shade900,
+                            fontWeight: FontWeight.bold),
+                      ),
                 Text(
-                  "Margin: ",
+                  "${margin.abs()}",
                   style: TextStyle(
-                      color: Colors.orange.shade800,
-                      fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  "$margin",
-                  style: TextStyle(
-                    color: Colors.orange.shade800,
+                    color: margin > 0
+                        ? Colors.orange.shade800
+                        : Colors.red.shade900,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 const Spacer(),
