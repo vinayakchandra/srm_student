@@ -27,6 +27,14 @@ class CourseCard extends StatelessWidget {
 
   CourseCard({required this.course});
 
+  int getMargin(int total, int present) {
+    int x = 0;
+    while ((present) / (total + x) >= 0.75) {
+      x++;
+    }
+    return x - 1;
+  }
+
   @override
   Widget build(BuildContext context) {
     int conductedHours = int.tryParse(course['conducted_hours']) ?? 0;
@@ -36,10 +44,7 @@ class CourseCard extends StatelessWidget {
         conductedHours > 0 ? (present / conductedHours) * 100 : 0;
 
     // Calculate threshold margin for 75% attendance
-    double threshold = conductedHours * 0.75;
-    int margin = present - threshold.ceil();
-    // presentPercentage = 50;
-    print("%=${presentPercentage / 100}");
+    int margin = getMargin(conductedHours, present);
 
     return Card(
       shape: RoundedRectangleBorder(
