@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:srm_student/details.dart';
 import 'package:srm_student/screens/loginScreen.dart';
 import 'package:srm_student/screens/AttendanceScreen.dart';
@@ -74,8 +74,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   color: Colors.white,
                   fontWeight: FontWeight.bold),
             ),
-            onTap: () {
+            onTap: () async {
+              final prefs = await SharedPreferences.getInstance();
               setState(() {
+                prefs.clear();
+                debugPrint("Logout");
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => const LoginPage()),
@@ -111,15 +114,21 @@ class _MyHomePageState extends State<MyHomePage> {
             text: "User",
           ),
           GButton(
-            icon: _selectedIndex == 1 ? Icons.watch_later : Icons.watch_later_outlined,
+            icon: _selectedIndex == 1
+                ? Icons.watch_later
+                : Icons.watch_later_outlined,
             text: "Time Table",
           ),
           GButton(
-            icon: _selectedIndex == 2 ? Icons.assessment : Icons.assessment_outlined,
+            icon: _selectedIndex == 2
+                ? Icons.assessment
+                : Icons.assessment_outlined,
             text: "Marks",
           ),
           GButton(
-            icon: _selectedIndex == 3 ? Icons.event_available: Icons.event_available_outlined,
+            icon: _selectedIndex == 3
+                ? Icons.event_available
+                : Icons.event_available_outlined,
             text: "Attendance",
           ),
         ],
