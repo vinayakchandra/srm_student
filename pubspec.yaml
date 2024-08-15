@@ -37,7 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   http:
   google_nav_bar:
-#  shared_preferences:
+  shared_preferences:
   percent_indicator:
 
 dev_dependencies:
