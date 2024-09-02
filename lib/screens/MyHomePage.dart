@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:srm_student/details.dart';
+import 'package:srm_student/screens/PollPostScreen.dart';
 import 'package:srm_student/screens/loginScreen.dart';
 import 'package:srm_student/screens/AttendanceScreen.dart';
 import 'package:srm_student/screens/userScreen.dart';
@@ -64,6 +65,27 @@ class _MyHomePageState extends State<MyHomePage> {
             accountName: Text("Made by Vinayak"),
             accountEmail: Text("vinayak.chandra.suryavanshi@gmail.com"),
           ),
+          ListTile(
+            tileColor: Colors.black38,
+            leading: const Icon(Icons.exit_to_app, color: Colors.white),
+            title: const Text(
+              "Polls/Posts",
+              style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            ),
+            onTap: () async {
+              setState(() {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const PollPostScreen()),
+                );
+              });
+            },
+          ),
+          const SizedBox(height: 5),
           ListTile(
             tileColor: Colors.red,
             leading: const Icon(Icons.exit_to_app, color: Colors.white),
