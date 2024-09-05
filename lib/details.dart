@@ -1,7 +1,6 @@
 class Details {
   Map<dynamic, dynamic>? data;
   int dayOrder = 1;
-  Map<dynamic, dynamic>? pollPostData;
 
   Details._privateConstructor();
 
@@ -25,8 +24,5 @@ class Details {
 
   int getDayOrder() {
     return dayOrder;
-  }
-  void setPollPost(Map<dynamic, dynamic> pollPostData){
-    this.pollPostData = pollPostData;
   }
 }

@@ -80,17 +80,6 @@ class StudentApi {
     }
     return details;
   }
-
-  Future<Map<dynamic, dynamic>> getPollPost() async {
-    final response = await http.get(Uri.parse(
-        'https://srm-api-4.azurewebsites.net/api/post/academia/posts'));
-
-    if (response.statusCode == 200) {
-      return json.decode(response.body);
-    } else {
-      throw Exception('Failed to load data');
-    }
-  }
 }
 
 void main() async {
