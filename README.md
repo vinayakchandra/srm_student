@@ -13,6 +13,9 @@ application aims to streamline the process of viewing student-related data in a 
 
 ## Features
 
+### Login View
+The Login View takes two inputs, first one is the NetID(before "@srmist.edu.in") and the other one is password.
+
 ### User Profile View
 
 The user profile allows students to view and manage their basic details, providing easy access to personal information.
